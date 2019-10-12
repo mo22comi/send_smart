@@ -55,7 +55,8 @@ def smart_info():
 
 def send_smart():
     mail_info = consts.MAIL_INFO.copy()
-    body = html.build_html(disk_usage(), disk_info(), smart_info())
+    html_contents = html.Html(disk_usage(), disk_info(), smart_info())
+    body = html_contents.build_html()
     mail_dict = {
         'subject': consts.MAIL_SUBJECT,
         'body': body

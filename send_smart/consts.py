@@ -1,12 +1,12 @@
 import os
 from dotenv import load_dotenv
-import pathlib
+from pathlib import Path
 
 
-dotenv_path = pathlib.Path(__file__).joinpath('../', '.env')
-load_dotenv(dotenv_path.resolve())
+dotenv_path = Path(__file__).resolve().parents[1].joinpath('.env')
+load_dotenv(dotenv_path)
 
-HOSTNAME = os.environ.get('HOSTNAME')
+NAS_NAME = os.environ.get('NAS_NAME')
 DF_CMD = os.environ.get('DF_CMD')
 DISK_INFO_CMD = os.environ.get('DISK_INFO_CMD')
 SMART_LIST_CMD = os.environ.get('SMART_LIST_CMD')
@@ -22,4 +22,3 @@ MAIL_INFO = {
     'smtp_pass': os.environ.get('SMTP_PASS'),
     'mail_to': os.environ.get('MAIL_TO')
 }
-

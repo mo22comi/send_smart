@@ -4,33 +4,53 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title></title>
-    <style type="text/css">
-    table {
-       border-collapse: collapse;
-    }
-    table th{
-        background-color: #79ace6;
-    }
-    table th, table td {
-        border: solid 1px black;
-    }
+    <style>
+        table{
+           border-collapse: collapse;
+        }
+        th{
+            background-color: #79ace6;
+        }
+        th, td{
+            border: solid 1px black;
+        }
+        td.number{
+            text-align: right;
+        }
+        td.caution{
+            background-color: red;
+        }
 	</style>
 </head>
 <body>
-    send from [{{ hostname }}]
     <h3>{{ usage }}</h3>
-    {% for disk, s in smart %}
+    {%- for disk, s in smart %}
     <h4>{{ disk }}</h4>
     <table>
         <tr>
-            <th>ID</th><th>説明</th><th>値</th><th>ワースト値</th><th>しきい値</th><th>Raw値</th><th>ステータス</th>
+            <th>ID</th>
+            <th>説明</th><th>値</th>
+            <th>ワースト値</th>
+            <th>しきい値</th>
+            <th>Raw値</th>
+            <th>ステータス</th>
         </tr>
-        {% for t in s %}
+        {%- for t in s %}
         <tr>
-            <td>{{ t.id }}</td><td>{{ t.description }}</td><td>{{ t.value }}</td><td>{{ t.worst_value }}</td><td>{{ t.threshold }}</td><td>{{ t.raw_value }}</td><td>{{ t.status }}</td>
+            <td class="number">{{ t.id }}</td>
+            <td class="description">{{ t.description }}</td>
+            <td class="number">{{ t.value }}</td>
+            <td class="number">{{ t.worst_value }}</td>
+            <td class="number">{{ t.threshold }}</td>
+            <td class="number">{{ t.raw_value }}</td>
+            {%- if t.status != '0' %}
+            <td class="number caution">{{ t.status }}</td>
+            {%- else %}
+            <td class="number">{{ t.status }}</td>
+            {%- endif %}
         </tr>
-        {% endfor %}
+        {%- endfor %}
     </table>
-    {% endfor %}
+    {%- endfor %}
 </body>
 </html>

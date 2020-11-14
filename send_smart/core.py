@@ -1,8 +1,9 @@
+import socket
 import re
 from subprocess import Popen, PIPE
 import consts
-import html
-import mail
+from html import Html
+from mail import Mail
 
 
 def res_cmd_linefeed(cmd):
@@ -54,14 +55,22 @@ def smart_info():
 
 
 def send_smart():
+    hostname = socket.gethostname()
     mail_info = consts.MAIL_INFO.copy()
-    html_contents = html.Html(disk_usage(), disk_info(), smart_info())
+    html_contents = Html(
+        usage=disk_usage(),
+        disks=disk_info(),
+        smart=smart_info(),
+        columns=consts.SMART_TABLE_COLUMN,
+        template_path=consts.TEMPLATE_PATH
+    )
+    subject = '{} {} from {}'.format(consts.NAS_NAME, consts.MAIL_SUBJECT, hostname)
     body = html_contents.build_html()
     mail_dict = {
-        'subject': consts.MAIL_SUBJECT,
+        'subject': subject,
         'body': body
     }
-    mailer = mail.Mail(mail_info)
+    mailer = Mail(mail_info)
     msg = mailer.create_message(mail_dict)
     mailer.send_mail(msg)
 

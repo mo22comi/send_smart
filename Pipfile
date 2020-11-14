@@ -10,7 +10,7 @@ python-dotenv = "*"
 jinja2 = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3"
 
 [scripts]
 send_smart = "python3 send_smart/core.py"

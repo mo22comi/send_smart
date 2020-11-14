@@ -70,6 +70,8 @@ def send_smart():
         'subject': subject,
         'body': body
     }
+    with open('../test/test.html', mode='w') as f:
+        f.write(body)
     mailer = Mail(mail_info)
     msg = mailer.create_message(mail_dict)
     mailer.send_mail(msg)

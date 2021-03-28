@@ -11,11 +11,11 @@ class Html:
 
     def build_html(self):
         smart_data_list = []
-        for i in range(len(self.smart)):
+        for smart_info in self.smart:
             smart_data = []
-            for j in range(len(self.smart[i])):
+            for j, smart_row in enumerate(smart_info):
                 if j > 0:
-                    value = self.smart[i][j].split(',')
+                    value = smart_row.split(',')
                     data = {key: val for key, val in zip(self.columns, value)}
                     smart_data.append(data)
             smart_data_list.append(smart_data)

@@ -33,8 +33,9 @@ def disk_info():
     info_list = res_cmd_linefeed(consts.DISK_INFO_CMD)
     dec_list = decode_output(info_list)
     disk_list = []
-    for i in range(len(dec_list)):
-        disk_str = 'Disk {} : {}'.format(str(i + 1), dec_list[i])
+
+    for i, dec in enumerate(dec_list):
+        disk_str = 'Disk {} : {}'.format(str(i + 1), dec)
         disk_list.append(disk_str)
 
     return disk_list

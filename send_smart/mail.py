@@ -24,5 +24,5 @@ class Mail:
             return True
         except smtplib.SMTPException:
             return False
-        finally:
+        else:
             smtp_obj.close()

@@ -1,0 +1,11 @@
+version: "3"
+services:
+  send_smart:
+    build: ./
+    container_name: app-send_smart
+    tty: true
+    volumes:
+      - type: bind
+        source: "/mnt/smart"
+        target: "/mnt/smart"
+    restart: always

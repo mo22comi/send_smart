@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.11-slim-buster
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get -y install locales && localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
